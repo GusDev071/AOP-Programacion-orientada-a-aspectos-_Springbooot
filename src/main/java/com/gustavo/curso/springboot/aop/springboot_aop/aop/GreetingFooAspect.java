@@ -6,7 +6,6 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.slf4j.Logger;
@@ -19,10 +18,7 @@ public class GreetingFooAspect {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Pointcut ("execution(* com.gustavo.curso.springboot.aop.springboot_aop.services.GreetingService.*(..))") // se usa para definir un punto de corte, es decir, un conjunto de métodos a los que se les aplicará el aspecto
-    private void greetingFooLoggerPointCut(){}
-
-    @Before("greetingFooLoggerPointCut()")
+    @Before("GreetingServicePointcuts.greetingFooLoggerPointCut()")
     public void loggerBefore(JoinPoint joinPoint){
         
         String method = joinPoint.getSignature().getName();
@@ -30,7 +26,7 @@ public class GreetingFooAspect {
         logger.info("Antes primero: "+ method + " invocando con los parametros " + args);  
     }
 
-    @After("greetingFooLoggerPointCut()")
+    @After("GreetingServicePointcuts.greetingFooLoggerPointCut()")
     public void loggerAfter(JoinPoint joinPoint){
         
         String method = joinPoint.getSignature().getName();
