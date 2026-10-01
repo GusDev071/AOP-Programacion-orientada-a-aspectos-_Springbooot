@@ -20,5 +20,10 @@ public class GreetingController {
         
         return ResponseEntity.ok(Collections.singletonMap("greeting", greetingService.sayHello("pepe", "hola de nuevo")));
     }
+    @GetMapping("/greeting-error")
+    public ResponseEntity<?> greetingError(){
+        
+        return ResponseEntity.ok(Collections.singletonMap("greeting", greetingService.sayHelloError("pepe", "hola de nuevo")));
+    }
 
 }
